@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dhan Khet - Bij Theke Paka Dhan</title>
+<style>
+body{margin:0;font-family:sans-serif;background:#87CEEB;text-align:center}
+h2{color:#fff;text-shadow:0 2px 5px #000;margin:10px}
+#status{background:#fff;display:inline-block;padding:10px 20px;border-radius:20px;font-weight:900;font-size:20px}
+#khet{position:relative;width:95%;max-width:800px;height:400px;margin:15px auto;background:linear-gradient(#a8e063,#56ab2f);border-radius:20px;overflow:hidden;border:5px solid #5a3a1a}
+#mati{position:absolute;bottom:0;width:100%;height:70px;background:#5a3a1a}
+#gach{position:absolute;bottom:60px;left:50%;transform:translateX(-50%);font-size:80px;transition:all 1s}
+#surjo{position:absolute;top:15px;right:20px;font-size:50px}
+button{padding:14px 30px;font-size:18px;background:#ff9800;color:#fff;border:none;border-radius:25px;font-weight:900;cursor:pointer}
+#progress{width:90%;max-width:700px;height:15px;background:#ddd;border-radius:10px;margin:10px auto;overflow:hidden}
+#bar{height:100%;width:20%;background:#ff9800;transition:1s}
+</style>
+</head>
+<body>
+<h2>🌾 Dhan Khet - Bij Theke Paka Dhan Porjonto</h2>
+<div id="status">Stage 1: Bij Bopon 🌱</div>
+<div id="progress"><div id="bar"></div></div>
+<br>
+<button onclick="nextStage()">▶ Next Dhap</button>
+<button onclick="autoPlay()" style="background:#4CAF50">▶ Auto Play Video</button>
+
+<div id="khet">
+<div id="surjo">☀️</div>
+<div id="gach">🌱</div>
+<div id="mati"></div>
+</div>
+<p style="color:#fff">Bij → Chara → Gach → Kacha Dhan → Paka Dhan 💛</p>
+
+<script>
+let stage = 1;
+let gach = document.getElementById('gach');
+let status = document.getElementById('status');
+let bar = document.getElementById('bar');
+let khet = document.getElementById('khet');
+
+function nextStage(){
+  stage++;
+  if(stage > 5){ stage = 1; khet.querySelectorAll('.extra').forEach(e=>e.remove()); document.body.style.background="#87CEEB"; }
+  if(stage==1){ status.innerText="Stage 1: Bij Bopon 🌱"; gach.innerText="🌱"; gach.style.fontSize="50px"; bar.style.width="20%"; }
+  if(stage==2){ status.innerText="Stage 2: Chara Ber Hoilo 🌿"; gach.innerText="🌿"; gach.style.fontSize="90px"; bar.style.width="40%"; }
+  if(stage==3){ status.innerText="Stage 3: Gach Boro Hoilo 🌾"; gach.innerText="🌾"; gach.style.fontSize="120px"; gach.style.filter="hue-rotate(90deg)"; bar.style.width="60%"; }
+  if(stage==4){ status.innerText="Stage 4: Kacha Dhan Aslo 🌾"; gach.innerText="🌾"; gach.style.fontSize="140px"; gach.style.filter="none"; bar.style.width="80%"; }
+  if(stage==5){
+    status.innerText="Stage 5: PAKA DHAN! 💛 Harvest Ready!";
+    gach.innerText="🌾"; gach.style.fontSize="160px"; bar.style.width="100%";
+    document.body.style.background="#FFD700";
+    for(let i=0;i<12;i++){
+      let d=document.createElement('div');
+      d.className='extra'; d.innerText='🌾';
+      d.style.position='absolute'; d.style.left=(5+i*8)+'%'; d.style.bottom='65px'; d.style.fontSize=(40+Math.random()*30)+'px';
+      khet.appendChild(d);
+    }
+  }
+}
+function autoPlay(){
+  let t=setInterval(()=>{
+    nextStage();
+    if(stage==5) clearInterval(t);
+  },1200);
+}
+</script>
+</body>
+</html>
